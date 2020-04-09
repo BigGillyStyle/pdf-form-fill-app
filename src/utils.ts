@@ -62,9 +62,12 @@ const lockField = (acroField: any) => {
   }
 };
 
-const lockPdfForm = (pdfDoc: PDFDocument) => {
+const prepFormBeforeSave = (pdfDoc: PDFDocument) => {
   const acroFields = getAcroFields(pdfDoc);
-  acroFields.forEach((field) => lockField(field));
+  acroFields.forEach((field) => {
+    field.delete(PDFName.of("AP"));
+    lockField(field);
+  });
 };
 
 const makePdfViewersHappy = (pdfDoc: PDFDocument) => {
@@ -106,7 +109,7 @@ export async function loadPdfForm(filename: string): Promise<PDFDocument> {
 }
 
 export async function savePdf(pdfDoc: PDFDocument, filename: string) {
-  lockPdfForm(pdfDoc);
+  prepFormBeforeSave(pdfDoc);
   const pdfBytes = await pdfDoc.save();
   fs.writeFileSync(filename, pdfBytes);
 }
