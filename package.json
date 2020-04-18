@@ -18,11 +18,12 @@
   },
   "homepage": "https://github.com/BigGillyStyle/pdf-form-fill-app#readme",
   "devDependencies": {
-    "@types/node": "^13.11.1",
+    "@types/node": "^13.13.0",
     "ts-node": "^8.8.2",
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "faker": "^4.1.0",
     "pdf-lib": "^1.4.1"
   }
 }
